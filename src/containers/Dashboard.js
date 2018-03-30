@@ -17,9 +17,11 @@ class Dashboard extends Component {
   render() {
     return (
       <div id="container">
-      <Header />>
-        <Inbox />
-        <Compose />
+        <Header />
+        <div id="content">
+          <Inbox />
+          <Compose />
+        </div>
       </div>
     );
   };
