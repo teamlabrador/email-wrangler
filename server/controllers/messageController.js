@@ -1,10 +1,11 @@
 const db = require('../models/postgresql.js');
 // const createUser = `Insert into "Users" ("username", "email", "firstName", "lastName") values ('mmb296', 'mmb296@cornell.edu', 'Madalyn', 'Baehre') RETURNING *;` Sample Post Request Insert
+
 const MessageController = {
+
   // Create a new student in the Database
   // Their information will be sent in the request body
   // This should send the created student
-
   createMessage (req, res) {
 
   },
