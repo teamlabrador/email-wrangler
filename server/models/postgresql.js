@@ -83,7 +83,6 @@ ALTER TABLE "Recepients" ADD CONSTRAINT "Recepients_fk1" FOREIGN KEY ("recepient
 ALTER TABLE "Sent" ADD CONSTRAINT "Sent_fk0" FOREIGN KEY ("messageId") REFERENCES "Messages"("id");
 ALTER TABLE "Sent" ADD CONSTRAINT "Sent_fk1" FOREIGN KEY ("Recepient") REFERENCES "Recepients"("id");`;
 
-const createUser = `Insert into "Users" ("username", "email", "firstName", "lastName") values ('mmb296', 'mmb296@cornell.edu', 'Madalyn', 'Baehre') RETURNING *;`
   // make SQL queries:
   db.query(createUser, (err, result) => {
 
