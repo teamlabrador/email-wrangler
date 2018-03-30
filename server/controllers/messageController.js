@@ -1,4 +1,4 @@
-// git const db = require('../models/postrgesql.js');
+const db = require('../models/postgresql.js');
 
 const MessageController = {
   // Create a new student in the Database
