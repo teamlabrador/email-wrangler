@@ -2,8 +2,8 @@ import React from 'react';
 
 const Approve = props => {
     return (
-      <div>
-        I'M APPROVE
+      <div id="approver" className="inboxes">
+        <div className="inboxTitle"><span>Approver</span></div>
       </div>
     );
   };

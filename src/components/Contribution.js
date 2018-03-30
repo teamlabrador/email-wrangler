@@ -2,8 +2,8 @@
 
 const Contribution = props => {
     return (
-      <div>
-        I'M CONTRIBUTION
+      <div id="contributor" className="inboxes">
+        <div className="inboxTitle"><span>Contributor</span></div>
       </div>
     );
   };
