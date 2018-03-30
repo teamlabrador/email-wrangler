@@ -3,7 +3,7 @@ import React from 'react';
 const Informational = props => {
     return (
       <div>
-        im informational
+        I'M INFORMATIONAL
       </div>
     );
   };

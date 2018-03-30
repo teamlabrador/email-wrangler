@@ -17,11 +17,11 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state = {}) {
-  return {prop: state.prop};
+  return { prop: state.prop };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {actions: bindActionCreators(actionCreators, dispatch)};
+  return { actions: bindActionCreators(actionCreators, dispatch) };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -3,7 +3,7 @@ import React from 'react';
 const Contribution = props => {
     return (
       <div>
-        I'm Contribution
+        I'M CONTRIBUTION
       </div>
     );
   };

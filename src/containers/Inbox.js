@@ -20,11 +20,11 @@ class Inbox extends Component {
   };
 }
 
-function mapStateToProps(state = {}) {
+function mapStateToProps (state = {}) {
   return {prop: state.prop};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {actions: bindActionCreators(actionCreators, dispatch)};
 }
 

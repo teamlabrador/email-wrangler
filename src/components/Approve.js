@@ -3,7 +3,7 @@ import React from 'react';
 const Approve = props => {
     return (
       <div>
-        i'm approve
+        I'M APPROVE
       </div>
     );
   };
