@@ -1,9 +1,9 @@
-import React from 'react';
+  import React from 'react';
 
 const Contribution = props => {
     return (
-      <div id="contribution">
-        I'm Contribution
+      <div>
+        I'M CONTRIBUTION
       </div>
     );
   };

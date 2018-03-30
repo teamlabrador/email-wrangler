@@ -2,8 +2,8 @@ import React from 'react';
 
 const Informational = props => {
     return (
-      <div id="informed">
-        im informational
+      <div>
+        I'M INFORMATIONAL
       </div>
     );
   };
