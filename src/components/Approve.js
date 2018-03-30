@@ -2,7 +2,7 @@ import React from 'react';
 
 const Approve = props => {
     return (
-      <div>
+      <div id="approval">
         i'm approve
       </div>
     );

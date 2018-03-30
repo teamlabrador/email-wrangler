@@ -2,7 +2,7 @@ import React from 'react';
 
 const Informational = props => {
     return (
-      <div>
+      <div id="informed">
         im informational
       </div>
     );
