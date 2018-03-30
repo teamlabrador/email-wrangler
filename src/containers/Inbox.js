@@ -7,10 +7,18 @@ import Contribution from '../components/Contribution';
 import Approve from '../components/Approve';
 import Informational from '../components/Informational';
 
+function mapStateToProps(state = {}) {
+  return {prop: state.prop};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {actions: bindActionCreators(actionCreators, dispatch)};
+}
+
 class Inbox extends Component {
   render() {
     return (
-      <div>
+      <div id="inbox">
         <Projects />
         <Contribution />
         <Approve />
@@ -18,14 +26,6 @@ class Inbox extends Component {
       </div>
     );
   };
-}
-
-function mapStateToProps (state = {}) {
-  return {prop: state.prop};
-}
-
-function mapDispatchToProps (dispatch) {
-  return {actions: bindActionCreators(actionCreators, dispatch)};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inbox);
