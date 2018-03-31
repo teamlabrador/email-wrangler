@@ -1,21 +1,26 @@
 // import actionType constants
 import * as types from '../constants/actionTypes';
 
-export const addStory = (story) => ({
-  type: types.ADD_STORY,
-  story,
+export const login = (credentials) => ({
+  type: types.LOGIN,
+  payload: credentials,
 });
 
-export const deleteStory = (storyId) => ({
-  type: types.DELETE_STORY,
-  id: storyId,
+export const logout = () => ({
+  type: types.LOGOUT,
 });
 
-export const getStories = () => ({
-  type: types.GET_STORIES
+export const composeThread = (threadInfo) => ({
+  type: types.COMPOSE_THREAD,
+  payload: threadInfo,
 });
 
-export const updateStory = (storyId) => ({
-  type: types.UPDATE_STORY,
-  id: storyId,
+export const composeMessage = (messageInfo) => ({
+  type: types.COMPOSE_MESSAGE,
+  payload: messageInfo,
+});
+
+export const authorizeMessage = (messageInfo) => ({
+  type: types.AUTHORIZE_MESSAGE,
+  payload: messageInfo,
 });

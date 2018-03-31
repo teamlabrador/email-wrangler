@@ -10,10 +10,10 @@ const initialState = {
 
 const emailReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.ADD_STORY:
-      return Object.assign({}, state, {
-        item: 'new item'
-      });
+    // case types.ADD_STORY:
+    //   return Object.assign({}, state, {
+    //     item: 'new item'
+    //   });
     default:
       return state;
   }
