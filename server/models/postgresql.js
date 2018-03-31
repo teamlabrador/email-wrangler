@@ -6,4 +6,5 @@ const db = new Client({
 });
 db.connect();
 
+let setUpQuery = ``
 module.exports = db;
