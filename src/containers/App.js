@@ -5,24 +5,22 @@ import * as actionCreators from './../actions/actions';
 import Dashboard from './Dashboard';
 import Login from '../components/Login';
 
+const mapStateToProps = store => ({
+  // add pertinent state here
+  user: store.projects.user,
+});
 
-function mapStateToProps(state = {}) {
-  return { prop: state.prop };
-}
-
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actionCreators, dispatch) };
-}
-
-// for testing
-const login = false;
-
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(actionCreators, dispatch) 
+});
 class App extends Component {
   render() {
-    if (login) {
+    console.log(this.props);
+    if (!this.props.user.userId) {
       return (
-        <div>
-          <Login />
+        <div className="Login">
+          <Login  
+            login={this.props.actions.login} />
         </div>
       );
     } else {

@@ -10,9 +10,11 @@ const Header = props => {
           Email Wrangler
         </div>
         <div className="userProfile">
-          <img className="userImage" src="https://avatars2.githubusercontent.com/u/7544036?s=460&v=4" alt="User1"/>
-          <div className="email">Camaromelt@gmail.com</div>
-        
+          <img className="userImage" src={props.user.userImage} alt="User1"/>
+          <div className="email">     {props.user.userName}
+          </div>
+          <button className="logout" onClick={() => props.logout()}>Logout</button>
+
         </div>
       </header>
     );
