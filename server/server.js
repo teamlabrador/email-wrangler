@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 const threadRouter = express.Router();
 app.use('/thread', threadRouter);
 
-app.get('/', threadController.getMessages);
+app.get('/:userId', threadController.getMessages);
 // (req, res) => {
 //   res.json({ data: 'Tons of stuff'});
 // }
