@@ -3,9 +3,6 @@ import * as types from '../constants/actionTypes';
 const initialState = {
 
   user: {
-    userId: 1,
-    userImage: `https://avatars2.githubusercontent.com/u/7544036?s=460&v=4`,
-    userName: `Camaromelt`
   },
 
   threadList: {
@@ -51,7 +48,7 @@ const initialState = {
       }],
       } 
     ],
-    collaborators:[{
+    contributors:[{
     threadId: 3,
     threadAuthor: 'Maddie',
     subject: 'Celebration Ideas, post group project',
@@ -97,15 +94,32 @@ const initialState = {
   }
 };
 
-const emailReducer = (state = initialState, action) => {
+const emailReducer = (state = initialState, action) =>
+{
   switch (action.type) {
-    // case types.ADD_STORY:
-    //   return Object.assign({}, state, {
-    //     item: 'new item'
-    //   });
+    case types.LOGIN:
+      let user = {
+        userId: 2,
+        userImage: `https://avatars0.githubusercontent.com/u/34157644?s=64&v=4`,
+        userName: `Back2bas1cs`
+      }
+      return {
+        ...state,
+        user,
+      };
+    case types.LOGOUT:
+    return {
+      ...state,
+      user: {},
+    };
+    case types:composeThread:
+    return {
+      ...state
+    };
     default:
       return state;
   }
+
 }
 
 export default emailReducer

@@ -3,26 +3,30 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from './../actions/actions';
 import Projects from '../components/Projects';
-import Contribution from '../components/Contribution';
+import Contribute from '../components/Contribution';
 import Approve from '../components/Approve';
 import Informed from '../components/Informed';
 
-function mapStateToProps(state = {}) {
-  return {prop: state.prop};
-}
+const mapStateToProps = store => ({
+  // add pertinent state here
+  approve: store.projects.threadList.approvers,
+  projects: store.projects.threadList.projects,
+  informed: store.projects.threadList.informed,
+  contribute: store.projects.threadList.contributors
+});
 
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actionCreators, dispatch) };
-}
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(actionCreators, dispatch) 
+});
 
 class Inbox extends Component {
   render() {
     return (
       <div id="inbox">
-        <Projects />
-        <Contribution />
-        <Approve />
-        <Informed />
+        <Projects projects={this.props.projects}/>
+        <Contribute contribute={this.props.contribute}/>
+        <Approve approve={this.props.approve}/>
+        <Informed informed={this.props.informed}/>
       </div>
     );
   };
