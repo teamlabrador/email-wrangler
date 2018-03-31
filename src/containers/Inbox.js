@@ -5,14 +5,14 @@ import * as actionCreators from './../actions/actions';
 import Projects from '../components/Projects';
 import Contribution from '../components/Contribution';
 import Approve from '../components/Approve';
-import Informational from '../components/Informational';
+import Informed from '../components/Informed';
 
 function mapStateToProps(state = {}) {
   return {prop: state.prop};
 }
 
 function mapDispatchToProps(dispatch) {
-  return {actions: bindActionCreators(actionCreators, dispatch)};
+  return { actions: bindActionCreators(actionCreators, dispatch) };
 }
 
 class Inbox extends Component {
@@ -22,7 +22,7 @@ class Inbox extends Component {
         <Projects />
         <Contribution />
         <Approve />
-        <Informational />
+        <Informed />
       </div>
     );
   };
