@@ -66,3 +66,11 @@ header .email{
   align-items: center;
   justify-Content: center;
 }
+
+.thread {
+  border: 2px solid dodgerblue;
+}
+.message {
+  border: 2px solid lightgray;
+  width: 100%;
+}
