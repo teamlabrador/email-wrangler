@@ -4,6 +4,11 @@ const bodyParser = require('body-parser');
 const PORT = 8080;
 const threadController = require('./controllers/messageController.js');
 const userController = require('./controllers/userController.js');
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+ });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const threadRouter = express.Router();
