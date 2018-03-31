@@ -8,17 +8,21 @@ app.use(bodyParser.json());
 const threadRouter = express.Router();
 app.use('/thread', threadRouter);
 
-app.get('/', (req, res) => {
-  res.json({ data: 'Tons of stuff'});
-})
-threadRouter.post('/', (req, res) => {
-  res.json({ success: req.body.Stuff});
-});
+app.get('/', threadController.getMessages);
+// (req, res) => {
+//   res.json({ data: 'Tons of stuff'});
+// }
 
-threadRouter.post('/:id', (req, res) => {
-  const id = req.params.id;
-    res.json({ success: id});
-});
+threadRouter.post('/', threadController.createThread);
+// (req, res) => {
+//   res.json({ success: req.body.Stuff});
+// }
+
+threadRouter.post('/:threadId', threadController.createMessage);
+// (req, res) => {
+//   const id = req.params.id;
+//     res.json({ success: id});
+// }
 
 app.listen(PORT, () => {
   console.log('listening on port 8080...')
