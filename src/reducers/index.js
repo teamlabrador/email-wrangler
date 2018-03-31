@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-
+import { reducer as formReducer } from 'redux-form'
 // import all reducers here
 import emailReducer from './emailReducer.js';
 
@@ -8,7 +8,8 @@ import emailReducer from './emailReducer.js';
 // reducers is a FUNCTION
 const reducers = combineReducers({
   // if we had other reducers, they would go here
-  projects: emailReducer
+  projects: emailReducer,
+  form: formReducer
 });
 
 // make the combined reducers available for import

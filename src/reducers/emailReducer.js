@@ -8,8 +8,7 @@ const initialState = {
     userName: `Camaromelt`
   },
   threadList: {
-
-    projects: [ {
+    projects: [{
       threadId: 1,
       subject: 'what what',
       createdAt: 'now',
@@ -19,34 +18,33 @@ const initialState = {
         message: "sup",
         author: "JD",
         createdAt: "whenever"
-      },
-      {
+        },
+        {
         messageId: 2,
         message: "whatsssssszzzzup",
         author: "Paul",
         createdAt: "whenever + 1"
-      } ],
-    } ],
-
+        }],
+      }],
     approvers: [ {
       threadId: 2,
-      subject: ' what',
+      subject: 'what',
       createdAt: 'nowwwwwww',
       messages: [ {
         messageId: 1,
         message: "doodah approver",
         author: "Ben",
         createdAt: "i dunno"
-      },
-      {
+        },
+        {
         messageId: 2,
         message: "whatsssssszzzzup",
         author: "Paul",
         createdAt: "whenever + 1"
-      } ],
-    } ],
-
-  collaborators: [
+      }],
+      } 
+    ],
+    collaborators:[{
     threadId: 3,
     subject: 'adsfasfas adsf',
     createdAt: 'dfdfd',
@@ -56,13 +54,15 @@ const initialState = {
       message: "aaaa",
       author: "Maddie",
       createdAt: "u"
-    },
-    {
+      },
+      {
       messageId: 2,
       message: "adfaf",
       author: "JD",
       createdAt: "w + 1"
-    } ],
+      } ]
+    }
+    ],
     informed: [ {
       threadId: 4,
       subject: 'what what',
@@ -73,16 +73,15 @@ const initialState = {
         message: "sup",
         author: "JD",
         createdAt: "whenever"
-      },
-      {
+        },
+        {
         messageId: 2,
         message: "whatsssssszzzzup",
         author: "Paul",
         createdAt: "whenever + 1"
       } ],
     }]
-  };
-
+  }
 };
 
 const emailReducer = (state = initialState, action) => {
