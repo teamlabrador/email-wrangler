@@ -9,7 +9,7 @@ const MessageController = {
 
   createThread (req, res) {
 
-  }
+  },
 
   createMessage (req, res) {
     
