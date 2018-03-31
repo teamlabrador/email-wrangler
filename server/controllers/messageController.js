@@ -6,8 +6,13 @@ const MessageController = {
   // Create a new student in the Database
   // Their information will be sent in the request body
   // This should send the created student
-  createMessage (req, res) {
 
+  createThread (req, res) {
+
+  }
+
+  createMessage (req, res) {
+    
   },
 
   // Get a student from the database and send it in the response

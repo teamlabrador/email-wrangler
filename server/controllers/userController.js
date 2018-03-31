@@ -11,7 +11,7 @@ const MessageController = {
     // const example = `SELECT "message" from "Messages" where "threadId" = (SELECT "id" FROM "Threads" WHERE "createdById" = 1)`
 
 
-    const createUserQuery =  `INSERT INTO "Users" ("id", "username", "email", "password", "firstName", "lastName")
+    const createUserQuery = `INSERT INTO "Users" ("id", "username", "email", "password", "firstName", "lastName")
     VALUES (${ id }, ${ req.body.id }, ${ req.body.email }, ${ req.body.password }, ${ req.body.firstName }, ${ req.body.lastName }')`;
 
     db.query(createUserQuery, (err, result) => {
