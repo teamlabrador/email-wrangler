@@ -12,7 +12,7 @@ const Compose = props => {
             name="contributor"
             component="input"
             type="text"
-            placeholder="Contributors"
+            placeholder="Emails(comma seprated)"
           />
         </div>
       </div>

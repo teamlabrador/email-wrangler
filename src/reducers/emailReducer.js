@@ -3,104 +3,123 @@ import * as types from '../constants/actionTypes';
 const initialState = {
 
   user: {
-    userId: 1,
-    userImage: `https://avatars2.githubusercontent.com/u/7544036?s=460&v=4`,
-    userName: `Camaromelt`
   },
 
   threadList: {
 
     projects: [ {
       threadId: 1,
-      subject: 'what what',
-      createdAt: 'now',
+      subject: 'Demo Testing: Project Plan Run Through',
+      createdAt: 'March 29th, 2018',
       group: 1,
       messages: [ {
         messageId: 1,
-        message: "sup",
-        author: "JD",
-        createdAt: "whenever"
-      },
-      {
+        message: "Initial run through for the group, and assign the scrum projects to different users in our group. \n Things to in mind would be everyone's skill level and the frameworks that are being used.",
+        author: "Ben",
+        createdAt: "March 29, 2018",
+        group: 1,
+        },
+        {
         messageId: 2,
-        message: "whatsssssszzzzup",
+        message: "I would like to work on the front end and work with Maddie to set up the routes to post to the database",
         author: "Paul",
-        createdAt: "whenever + 1"
-      } ],
-    } ],
-
+        createdAt: "March 30th, 2018",
+        group: 1,
+        }],
+      }],
     approvers: [ {
       threadId: 2,
-      subject: ' what',
-      createdAt: 'nowwwwwww',
+      threadAuthor: 'Maddie',
+      subject: 'Project Goals',
+      createdAt: 'March 30th, 2018',
       messages: [ {
         messageId: 1,
-        message: "doodah approver",
-        author: "Ben",
-        createdAt: "i dunno"
-      },
-      {
-        messageId: 2,
-        message: "whatsssssszzzzup",
-        author: "Paul",
-        createdAt: "whenever + 1"
-      } ],
-    } ],
-
-    collaborators: [ {
-      threadId: 3,
-      subject: 'adsfasfas adsf',
-      createdAt: 'dfdfd',
-      group: 1,
-      messages: [ {
-        messageId: 1,
-        message: "aaaa",
+        message: "Have the best looking userface, and do not let anyone find out about the bugs in the code!!!",
         author: "Maddie",
-        createdAt: "u"
+        createdAt: "March 30th, 2018",
+        group: 1,
+        },
+        {
+        messageId: 2,
+        message: "Guys, I solved the problem. Lets post something on trello, and grab a new task!!!",
+        author: "Ben",
+        createdAt: "March 30th, 2018",
+        group: 2,
+      }],
+      } 
+    ],
+    contributors:[{
+    threadId: 3,
+    threadAuthor: 'Maddie',
+    subject: 'Celebration Ideas, post group project',
+    createdAt: 'Codesmith LLC, VENICE CA',
+    group: 1,
+    messages: [ {
+      messageId: 1,
+      message: "So many choices, what are we going to do?",
+      author: "JD",
+      createdAt: "March 30th, 2018",
+      group: 1,
       },
       {
-        messageId: 2,
-        message: "adfaf",
-        author: "JD",
-        createdAt: "w + 1"
-      } ],
-    } ],
-
+      messageId: 2,
+      message: "Let's go get TOMS coffee",
+      author: "JD",
+      createdAt: "April 2, 2018",
+      group: 3,
+      } ]
+    }
+    ],
     informed: [ {
       threadId: 4,
-      subject: 'what what',
-      createdAt: 'now',
+      threadAuthor: 'Maddie',
+      subject: 'Group Coffee Invitation',
+      createdAt: 'April 2, 2018',
       group: 1,
       messages: [ {
         messageId: 1,
-        message: "sup",
-        author: "JD",
-        createdAt: "whenever"
-      },
-      {
-        messageId: 2,
-        message: "whatsssssszzzzup",
+        message: "I love coldbrew!!",
         author: "Paul",
-        createdAt: "whenever + 1"
-      },
-      messageId: 3,
-      message: "yayayaya",
-      author: "Alex",
-      createdAt: "whenever + 2"
-    } ],
- }
-
+        createdAt: "April 2, 2018",
+        group: 1,
+        },
+        {
+        messageId: 2,
+        message: "Lets go wakingggg!!! ",
+        author: "Ben",
+        createdAt: "April 2, 2018",
+        group: 2,
+      } ],
+    }]
+  }
 };
 
-const emailReducer = (state = initialState, action) => {
+const emailReducer = (state = initialState, action) =>
+{
   switch (action.type) {
-    // case types.ADD_STORY:
-    //   return Object.assign({}, state, {
-    //     item: 'new item'
-    //   });
+    case types.LOGIN:
+      let user = {
+        userId: 2,
+        userImage: `https://avatars0.githubusercontent.com/u/34157644?s=64&v=4`,
+        userName: `Back2bas1cs`
+      }
+      return {
+        ...state,
+        user,
+      };
+    case types.LOGOUT:
+    return {
+      ...state,
+      user: {},
+    };
+    case types:composeThread:
+    return {
+      ...state
+    };
     default:
       return state;
   }
+
 }
 
 export default emailReducer

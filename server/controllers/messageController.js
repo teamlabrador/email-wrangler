@@ -81,17 +81,97 @@ const MessageController = {
   // Their first name will be in the request parameter 'name'
   // This should send the found student
   getMessages (req, res) {
+    const userId = req.params.userId;
+    res.locals.results = [];
     const projectSelector = `Select
     "Threads"."id" as "threadId", "Threads"."subject", "Threads"."createdAt", "Threads"."groupId" as "group",
-    "Messages"."id" as "messagesId", "Messages"."message", "Messages"."createdAt",
+    "Messages"."id" as "messagesId", "Messages"."message", "Messages"."createdAt" as "messageCreatedAt",
     "Users2"."firstName" as "author"
     from "Users" 
     inner join "Threads" on "Threads"."createdById" = "Users"."id"
     inner join "Messages" on "Messages"."threadId" = "Threads"."id"
     inner join "Users" as "Users2" on "Messages"."createdById" = "Users2"."id"
-    where "Users"."id" = 1;`
+    where "Users"."id" = '${userId}'; `
     db.query(projectSelector, (err, result) => {
-      res.json(result);
+      let threadId;
+      let projects = [];
+      for (let i = 0; i < result.rows; i++) {
+        let newThreadId = result.rows[i].threadId
+        if (threadId !== newThreadId) {
+          threadId = newThreadId;
+          let newThread = {};
+          newThread.threadId = threadId;
+          newThread.subject = result.rows[i].subject;
+          newThread.createdAt = result.rows[i].createdAt;
+          newThread.groupId = result.rows[i].groupId;
+          newThread.messages = [];
+          let newMessage = {};
+          newMessage.messageId = result.rows[i].messageId;
+          newMessage.author = result.rows[i].author;
+          mewMessage.message = result.rows[i].message;
+          newMessage.messageCreatedAt = result.rows[i].messageCreatedAt;
+          newThread.messages.push(newMessage);
+        }
+      }
+      res.locals.results.push(result.rows);
+    });
+
+    const contributorSelector = `Select
+    "Threads"."id" as "threadId", "Threads"."subject", "Threads"."createdAt", "Users3"."firstName" as "threadAuthor",
+    "Messages"."id" as "messagesId", "Messages"."message", "Messages"."createdAt", "Messages"."groupId" as "messageGroupId", "Messages"."createdAt" as "messageCreatedAt",
+    "Users2"."firstName" as "author"
+    
+    from "Groups" 
+    inner join "Recipients" on "Recipients"."groupId" = "Groups"."id"
+    inner join "Users" on "Recipients"."recipientId" = "Users"."id"
+    inner join "Threads" on "Recipients"."threadId" = "Threads"."id"
+    inner join "Users" as "Users3" on "Threads"."createdById" = "Users3"."id"
+    inner join "Groups" as "Groups2" on "Threads"."groupId" = "Groups2"."id"
+    inner join "Messages" on "Messages"."threadId" = "Threads"."id"
+    inner join "Users" as "Users2" on "Messages"."createdById" = "Users2"."id"
+    
+    where "Groups"."id" = ${1} and "Users"."id" = '${userId}' and "Groups2"."id" >= ${1};`
+    db.query(contributorSelector, (err, result) => {
+      res.locals.results.push(result.rows);
+    });
+
+    const approvalSelector = `Select
+    "Threads"."id" as "threadId", "Threads"."subject", "Threads"."createdAt", "Users3"."firstName" as "threadAuthor",
+    "Messages"."id" as "messagesId", "Messages"."message", "Messages"."createdAt", "Messages"."groupId" as "messageGroupId", "Messages"."createdAt" as "messageCreatedAt",
+    "Users2"."firstName" as "author"
+    
+    from "Groups" 
+    inner join "Recipients" on "Recipients"."groupId" = "Groups"."id"
+    inner join "Users" on "Recipients"."recipientId" = "Users"."id"
+    inner join "Threads" on "Recipients"."threadId" = "Threads"."id"
+    inner join "Users" as "Users3" on "Threads"."createdById" = "Users3"."id"
+    inner join "Groups" as "Groups2" on "Threads"."groupId" = "Groups2"."id"
+    inner join "Messages" on "Messages"."threadId" = "Threads"."id"
+    inner join "Users" as "Users2" on "Messages"."createdById" = "Users2"."id"
+    
+    where "Groups"."id" = ${2} and "Users"."id" = '${userId}' and "Groups2"."id" >= ${2};`
+    db.query(approvalSelector, (err, result) => {
+      res.locals.results.push(result.rows);
+    });
+
+    const informedSelector = `Select
+    "Threads"."id" as "threadId", "Threads"."subject", "Threads"."createdAt", "Users3"."firstName" as "threadAuthor",
+    "Messages"."id" as "messagesId", "Messages"."message", "Messages"."createdAt", "Messages"."groupId" as "messageGroupId", "Messages"."createdAt" as "messageCreatedAt",
+    "Users2"."firstName" as "author"
+    
+    from "Groups" 
+    inner join "Recipients" on "Recipients"."groupId" = "Groups"."id"
+    inner join "Users" on "Recipients"."recipientId" = "Users"."id"
+    inner join "Threads" on "Recipients"."threadId" = "Threads"."id"
+    inner join "Users" as "Users3" on "Threads"."createdById" = "Users3"."id"
+    inner join "Groups" as "Groups2" on "Threads"."groupId" = "Groups2"."id"
+    inner join "Messages" on "Messages"."threadId" = "Threads"."id"
+    inner join "Users" as "Users2" on "Messages"."createdById" = "Users2"."id"
+    
+    where "Groups"."id" = ${3} and "Users"."id" = '${userId}' and "Groups2"."id" >= ${3};`
+    db.query(informedSelector, (err, result) => {
+      res.locals.results.push(result.rows);
+      res.json(res.locals.results);
     });
   },
 
