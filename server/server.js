@@ -15,10 +15,10 @@ threadRouter.post('/', (req, res) => {
   res.json({ success: req.body.Stuff});
 });
 
-threadRouter.post('/:id', messageController.createThread);
-// (req, res) => {
-//   const id = req.params.id;
-//     res.json({ success: id});
+threadRouter.post('/:id', (req, res) => {
+  const id = req.params.id;
+    res.json({ success: id});
+});
 
 app.listen(PORT, () => {
   console.log('listening on port 8080...')

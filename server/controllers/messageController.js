@@ -2,10 +2,10 @@ const db = require('../models/postgresql.js');
 const messageController = {
 
   createThread (req, res) {
-    const { subject, message }
-    const id = req.params.id;
-    const threadQuery = `Insert into "Threads" ("subject", "createdById", "groupId") values (${subject}, ${id}, ${1});`
-    const firstMessageQuery = `Insert into "Messages" ("message", "threadId", "createdById", "groupId") values (${message}, ${threadId}, ${id}, ${1});`
+    // const { subject, message }
+    // const id = req.params.id;
+    // const threadQuery = `Insert into "Threads" ("subject", "createdById", "groupId") values (${subject}, ${id}, ${1});`
+    // const firstMessageQuery = `Insert into "Messages" ("message", "threadId", "createdById", "groupId") values (${message}, ${threadId}, ${id}, ${1});`
     
     
   },
