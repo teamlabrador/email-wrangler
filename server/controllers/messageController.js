@@ -95,6 +95,8 @@ const MessageController = {
     where "Users"."id" = '${userId}'; `
     
     db.query(projectSelector, (err, result) => {
+      let projects = [];
+      if (result.rows.length > 0) {
       let sepThreads = [result.rows[0].threadId];
       // first get the unique threads
       for (let i = 1; i < result.rows.length; i++) {
@@ -108,7 +110,7 @@ const MessageController = {
           sepThreads.push(result.rows[i].threadId);
         }
       }
-      let projects = [];
+
       for (let k = 0; k < sepThreads.length; k++) {
         let newThread = {};
         newThread.threadId = sepThreads[k];
@@ -135,6 +137,7 @@ const MessageController = {
         }
         projects.push(newThread);
       }
+    }
 
       res.locals.threadList.projects = projects;
     });
