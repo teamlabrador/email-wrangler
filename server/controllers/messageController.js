@@ -81,39 +81,62 @@ const MessageController = {
   // Their first name will be in the request parameter 'name'
   // This should send the found student
   getMessages (req, res) {
+
     const userId = req.params.userId;
-    res.locals.results = [];
-    const projectSelector = `Select
-    "Threads"."id" as "threadId", "Threads"."subject", "Threads"."createdAt", "Threads"."groupId" as "group",
-    "Messages"."id" as "messagesId", "Messages"."message", "Messages"."createdAt" as "messageCreatedAt",
+    res.locals.threadList = {};
+    const projectSelector = `Select "Users"."firstName" as "threadAuthor",
+    "Threads"."id" as "threadId", "Threads"."subject", "Threads"."createdAt", "Threads"."groupId",
+    "Messages"."id" as "messagesId", "Messages"."message", "Messages"."createdAt" as "messageCreatedAt", "Messages"."groupId" as "messageGroupId",
     "Users2"."firstName" as "author"
     from "Users" 
     inner join "Threads" on "Threads"."createdById" = "Users"."id"
     inner join "Messages" on "Messages"."threadId" = "Threads"."id"
     inner join "Users" as "Users2" on "Messages"."createdById" = "Users2"."id"
     where "Users"."id" = '${userId}'; `
+    
     db.query(projectSelector, (err, result) => {
-      let threadId;
-      let projects = [];
-      for (let i = 0; i < result.rows; i++) {
-        let newThreadId = result.rows[i].threadId
-        if (threadId !== newThreadId) {
-          threadId = newThreadId;
-          let newThread = {};
-          newThread.threadId = threadId;
-          newThread.subject = result.rows[i].subject;
-          newThread.createdAt = result.rows[i].createdAt;
-          newThread.groupId = result.rows[i].groupId;
-          newThread.messages = [];
-          let newMessage = {};
-          newMessage.messageId = result.rows[i].messageId;
-          newMessage.author = result.rows[i].author;
-          mewMessage.message = result.rows[i].message;
-          newMessage.messageCreatedAt = result.rows[i].messageCreatedAt;
-          newThread.messages.push(newMessage);
+      let sepThreads = [result.rows[0].threadId];
+      // first get the unique threads
+      for (let i = 1; i < result.rows.length; i++) {
+        let count = 0;
+        for (let j = 0; j < sepThreads.length; j++) {
+          if (result.rows[i].threadId === sepThreads[j]) {
+            count++;
+          }
+        }
+        if (count === 0) {
+          sepThreads.push(result.rows[i].threadId);
         }
       }
-      res.locals.results.push(result.rows);
+      let projects = [];
+      for (let k = 0; k < sepThreads.length; k++) {
+        let newThread = {};
+        newThread.threadId = sepThreads[k];
+        let count = 0;
+        for (let l = 0; l < result.rows.length; l++) {
+          if (result.rows[l].threadId === newThread.threadId) {
+          newThread.subject = result.rows[l].subject;
+          newThread.threadAuthor = result.rows[l].threadAuthor;
+          newThread.createdAt = result.rows[l].createdAt;
+          newThread.group = result.rows[l].groupId;
+          if (count === 0) {
+            newThread.messages = [];
+          }
+          let newMessage = {};
+          let messagesId = result.rows[l].messagesId;
+          let author = result.rows[l].author;
+          let message = result.rows[l].message;
+          let messageCreatedAt = result.rows[l].messageCreatedAt;
+          let group = result.rows[l].messageGroupId;
+          newMessage = { messagesId, author, message, messageCreatedAt, group };
+          newThread.messages.push(newMessage);
+          count++;
+          }
+        }
+        projects.push(newThread);
+      }
+
+      res.locals.threadList.projects = projects;
     });
 
     const contributorSelector = `Select
@@ -131,8 +154,53 @@ const MessageController = {
     inner join "Users" as "Users2" on "Messages"."createdById" = "Users2"."id"
     
     where "Groups"."id" = ${1} and "Users"."id" = '${userId}' and "Groups2"."id" >= ${1};`
+    
     db.query(contributorSelector, (err, result) => {
-      res.locals.results.push(result.rows);
+      let collaborators = [];
+      if (result.rows.length > 0) {
+      let sepThreads = [result.rows[0].threadId];
+      // first get the unique threads
+      for (let i = 1; i < result.rows.length; i++) {
+        let count = 0;
+        for (let j = 0; j < sepThreads.length; j++) {
+          if (result.rows[i].threadId === sepThreads[j]) {
+            count++;
+          }
+        }
+        if (count === 0) {
+          sepThreads.push(result.rows[i].threadId);
+        }
+      }
+      
+      for (let k = 0; k < sepThreads.length; k++) {
+        let newThread = {};
+        newThread.threadId = sepThreads[k];
+        let count = 0;
+        for (let l = 0; l < result.rows.length; l++) {
+          if (result.rows[l].threadId === newThread.threadId) {
+          newThread.subject = result.rows[l].subject;
+          newThread.threadAuthor = result.rows[l].threadAuthor;
+          newThread.createdAt = result.rows[l].createdAt;
+          newThread.group = result.rows[l].groupId;
+          if (count === 0) {
+            newThread.messages = [];
+          }
+          let newMessage = {};
+          let messagesId = result.rows[l].messagesId;
+          let author = result.rows[l].author;
+          let message = result.rows[l].message;
+          let messageCreatedAt = result.rows[l].messageCreatedAt;
+          let group = result.rows[l].messageGroupId;
+          newMessage = { messagesId, author, message, messageCreatedAt, group };
+          newThread.messages.push(newMessage);
+          count++;
+          }
+        }
+        collaborators.push(newThread);
+      }
+    }
+      res.locals.threadList.collaborators = collaborators;
+
     });
 
     const approvalSelector = `Select
@@ -151,7 +219,52 @@ const MessageController = {
     
     where "Groups"."id" = ${2} and "Users"."id" = '${userId}' and "Groups2"."id" >= ${2};`
     db.query(approvalSelector, (err, result) => {
-      res.locals.results.push(result.rows);
+      let approvers = [];
+      if (result.rows.length > 0) {
+      let sepThreads = [result.rows[0].threadId];
+      // first get the unique threads
+      for (let i = 1; i < result.rows.length; i++) {
+        let count = 0;
+        for (let j = 0; j < sepThreads.length; j++) {
+          if (result.rows[i].threadId === sepThreads[j]) {
+            count++;
+          }
+        }
+        if (count === 0) {
+          sepThreads.push(result.rows[i].threadId);
+        }
+      }
+      
+      for (let k = 0; k < sepThreads.length; k++) {
+        let newThread = {};
+        newThread.threadId = sepThreads[k];
+        let count = 0;
+        for (let l = 0; l < result.rows.length; l++) {
+          if (result.rows[l].threadId === newThread.threadId) {
+          newThread.subject = result.rows[l].subject;
+          newThread.threadAuthor = result.rows[l].threadAuthor;
+          newThread.createdAt = result.rows[l].createdAt;
+          newThread.group = result.rows[l].groupId;
+          if (count === 0) {
+            newThread.messages = [];
+          }
+          let newMessage = {};
+          let messagesId = result.rows[l].messagesId;
+          let author = result.rows[l].author;
+          let message = result.rows[l].message;
+          let messageCreatedAt = result.rows[l].messageCreatedAt;
+          let group = result.rows[l].messageGroupId;
+          newMessage = { messagesId, author, message, messageCreatedAt, group };
+          newThread.messages.push(newMessage);
+          count++;
+          }
+        }
+        approvers.push(newThread);
+      }
+    }
+
+      res.locals.threadList.approvers = approvers;
+
     });
 
     const informedSelector = `Select
@@ -170,8 +283,53 @@ const MessageController = {
     
     where "Groups"."id" = ${3} and "Users"."id" = '${userId}' and "Groups2"."id" >= ${3};`
     db.query(informedSelector, (err, result) => {
-      res.locals.results.push(result.rows);
-      res.json(res.locals.results);
+      let informed = [];
+      if (result.rows.length > 0) {
+      let sepThreads = [result.rows[0].threadId];
+      // first get the unique threads
+      for (let i = 1; i < result.rows.length; i++) {
+        let count = 0;
+        for (let j = 0; j < sepThreads.length; j++) {
+          if (result.rows[i].threadId === sepThreads[j]) {
+            count++;
+          }
+        }
+        if (count === 0) {
+          sepThreads.push(result.rows[i].threadId);
+        }
+      }
+
+      for (let k = 0; k < sepThreads.length; k++) {
+        let newThread = {};
+        newThread.threadId = sepThreads[k];
+        let count = 0;
+        for (let l = 0; l < result.rows.length; l++) {
+          if (result.rows[l].threadId === newThread.threadId) {
+          newThread.subject = result.rows[l].subject;
+          newThread.threadAuthor = result.rows[l].threadAuthor;
+          newThread.createdAt = result.rows[l].createdAt;
+          newThread.group = result.rows[l].groupId;
+          if (count === 0) {
+            newThread.messages = [];
+          }
+          let newMessage = {};
+          let messagesId = result.rows[l].messagesId;
+          let author = result.rows[l].author;
+          let message = result.rows[l].message;
+          let messageCreatedAt = result.rows[l].messageCreatedAt;
+          let group = result.rows[l].messageGroupId;
+          newMessage = { messagesId, author, message, messageCreatedAt, group };
+          newThread.messages.push(newMessage);
+          count++;
+          }
+        }
+        informed.push(newThread);
+      }
+    }
+
+      res.locals.threadList.informed = informed;
+
+      res.json(res.locals.threadList);
     });
   },
 
