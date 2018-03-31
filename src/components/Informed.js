@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Informational = props => {
+const Informed = props => {
     return (
       <div id="informed" className="inboxes">
         <div className="inboxTitle"><span>Informed</span></div>
@@ -8,4 +8,4 @@ const Informational = props => {
     );
   };
 
-export default Informational;
+export default Informed;

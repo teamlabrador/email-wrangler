@@ -7,8 +7,10 @@ const initialState = {
     userImage: `https://avatars2.githubusercontent.com/u/7544036?s=460&v=4`,
     userName: `Camaromelt`
   },
+
   threadList: {
-    projects: [{
+
+    projects: [ {
       threadId: 1,
       subject: 'Demo Testing: Project Plan Run Through',
       createdAt: 'March 29th, 2018',
