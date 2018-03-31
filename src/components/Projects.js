@@ -2,8 +2,8 @@ import React from 'react';
 
 const Projects = props => {
     return (
-      <div>
-        im projects
+      <div id="projects" className="active inboxes">
+        <div className="inboxTitle"><span>Projects</span></div>
       </div>
     );
   };

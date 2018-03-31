@@ -7,6 +7,7 @@ const initialState = {
     userName: `Camaromelt`
   }
 };
+
 const emailReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_STORY:
@@ -19,4 +20,3 @@ const emailReducer = (state = initialState, action) => {
 }
 
 export default emailReducer
-

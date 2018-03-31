@@ -3,3 +3,66 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+header{
+  height: 75px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top:5px;
+  width: 100%;
+}
+.logoImage{
+  height: 60px;
+  width: auto;
+  border-radius: 50%;
+  margin-left:15px;
+}
+.userProfile{
+  display: flex;
+  width: 200px;
+  flex-direction:column;
+  width: auto;
+  margin-top:2.5px;
+  align-items: center;
+  justify-content: space-between;
+}
+.userImage{
+  height: 50px;
+  width: 50px;
+
+  border-radius: 50%;
+  margin-right:15px;
+}
+header .email{
+  color:white;
+}
+#content{
+  margin: 15px;
+}
+.title{
+  font-size: 22px;
+  color: white;
+}
+
+.inboxes{
+  min-height: 50px;
+  width: calc(100% - 30px);
+  padding:15px;
+  border-radius: 10px;
+  margin-bottom:15px;
+  border: 1px solid #ccc;
+}
+#informed.active, #approver.active, #contributor.active, #projects.active{
+  height:200px !important;
+}
+.inboxTitle{
+  height: 40px;
+  background-color: #ccc;
+  display:flex;
+  margin:-15px;
+  font-size: 20px;
+  border-radius:10px 10px 0 0;
+  align-items: center;
+  justify-Content: center;
+}

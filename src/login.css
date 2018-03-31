@@ -1,0 +1,40 @@
+/* body {
+  background-image: url('');
+  font-family: Lato, Trebuchet MS;
+  display: flex;
+  justify-content: center;
+  color: white;
+  margin-top: 200px;
+
+
+} */
+
+.login-box {
+  height: 400px;
+}
+
+.login-header {
+  background-color: #4A8CEF;
+  z-index: 10;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+}
+
+.login-content {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #373E45;
+  opacity: 0.5;
+  height: 360px;
+
+}
+
+label {
+  margin-left: 15px;
+}
+
+input[type="text"] {
+  color: black;
+  margin-left: 10px;
+}
