@@ -12,7 +12,6 @@ const MessageController = {
     let threadId;
     const threadQuery = `Insert into "Threads" ("subject", "createdById", "groupId") values ('${subject}', ${userId}, ${1}) returning "id" as "id";`
 
-<<<<<<< HEAD
     db.query(threadQuery, (err, result) => {
       threadId = result.rows[0].id;
       firstMessage(threadId);
@@ -20,9 +19,6 @@ const MessageController = {
       addApprovers(threadId);
       addInformed(threadId);
     });
-=======
-  },
->>>>>>> b732cd20dd6cba1c77b222b62d5495f163b5e11c
 
     function firstMessage(threadId) {
       const firstMessageQuery = `Insert into "Messages" ("message", "threadId", "createdById", "groupId") values ('${message}', ${threadId}, ${userId}, ${1});`
